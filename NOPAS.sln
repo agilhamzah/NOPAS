@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NOPAS", "NOPAS\NOPAS.csproj", "{F547429C-B324-414D-A87F-81DCE4B800B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F547429C-B324-414D-A87F-81DCE4B800B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F547429C-B324-414D-A87F-81DCE4B800B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F547429C-B324-414D-A87F-81DCE4B800B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F547429C-B324-414D-A87F-81DCE4B800B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6DB70EE-C1FF-42F7-9C27-F3DE241528E8}
+	EndGlobalSection
+EndGlobal
