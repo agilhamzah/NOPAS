@@ -59,5 +59,16 @@ namespace NOPAS
             this.Hide();
             new Produk().Show();
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new historitransaksi().Show();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

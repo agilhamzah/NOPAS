@@ -119,7 +119,11 @@ namespace NOPAS
                     MessageBox.Show("Produk berhasil di hapus", "informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     p.command("insert into log (id_user, activity, created_at) VALUES('" + Data.id_user + "', 'Admin menghapus produk', NOW())");
                     clear();
+
+                    isEditMode = false;
+                    tambah.Text = "Tambah";
                 }
+
             }
         }
 

@@ -135,8 +135,7 @@
             this.cbrole.FormattingEnabled = true;
             this.cbrole.Items.AddRange(new object[] {
             "admin",
-            "kasir",
-            "owner"});
+            "kasir"});
             this.cbrole.Location = new System.Drawing.Point(660, 162);
             this.cbrole.Name = "cbrole";
             this.cbrole.Size = new System.Drawing.Size(121, 28);

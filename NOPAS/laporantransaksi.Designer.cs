@@ -35,11 +35,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.reset = new System.Windows.Forms.Button();
             this.tglakhir = new System.Windows.Forms.DateTimePicker();
             this.tglawal = new System.Windows.Forms.DateTimePicker();
             this.cetak = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.nampro = new System.Windows.Forms.TextBox();
+            this.cari = new System.Windows.Forms.TextBox();
             this.dataGridTransaksi = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -109,11 +110,12 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.reset);
             this.panel2.Controls.Add(this.tglakhir);
             this.panel2.Controls.Add(this.tglawal);
             this.panel2.Controls.Add(this.cetak);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.nampro);
+            this.panel2.Controls.Add(this.cari);
             this.panel2.Controls.Add(this.dataGridTransaksi);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.label4);
@@ -122,6 +124,20 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(875, 648);
             this.panel2.TabIndex = 6;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // reset
+            // 
+            this.reset.BackColor = System.Drawing.Color.Maroon;
+            this.reset.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reset.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.reset.Location = new System.Drawing.Point(307, 202);
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(79, 40);
+            this.reset.TabIndex = 13;
+            this.reset.Text = "Reset";
+            this.reset.UseVisualStyleBackColor = false;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // tglakhir
             // 
@@ -158,19 +174,19 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(599, 157);
+            this.label2.Location = new System.Drawing.Point(566, 157);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 27);
             this.label2.TabIndex = 9;
             this.label2.Text = "Nama LKBB";
             // 
-            // nampro
+            // cari
             // 
-            this.nampro.Location = new System.Drawing.Point(604, 189);
-            this.nampro.Name = "nampro";
-            this.nampro.Size = new System.Drawing.Size(245, 26);
-            this.nampro.TabIndex = 8;
-            this.nampro.TextChanged += new System.EventHandler(this.nampro_TextChanged);
+            this.cari.Location = new System.Drawing.Point(570, 194);
+            this.cari.Name = "cari";
+            this.cari.Size = new System.Drawing.Size(245, 26);
+            this.cari.TabIndex = 8;
+            this.cari.TextChanged += new System.EventHandler(this.nampro_TextChanged);
             // 
             // dataGridTransaksi
             // 
@@ -188,7 +204,7 @@
             this.button4.BackColor = System.Drawing.Color.Maroon;
             this.button4.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button4.Location = new System.Drawing.Point(172, 202);
+            this.button4.Location = new System.Drawing.Point(164, 202);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(132, 40);
             this.button4.TabIndex = 3;
@@ -217,7 +233,7 @@
             this.label3.Text = "Laporan Transaksi";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // datatransaksi
+            // laporantransaksi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -226,7 +242,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "datatransaksi";
+            this.Name = "laporantransaksi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Halaman Laporan";
             this.Load += new System.EventHandler(this.datatransaksi_Load);
@@ -253,9 +269,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox nampro;
+        private System.Windows.Forms.TextBox cari;
         private System.Windows.Forms.Button cetak;
         private System.Windows.Forms.DateTimePicker tglakhir;
         private System.Windows.Forms.DateTimePicker tglawal;
+        private System.Windows.Forms.Button reset;
     }
 }

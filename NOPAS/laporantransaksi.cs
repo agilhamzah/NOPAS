@@ -66,37 +66,84 @@ namespace NOPAS
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (tglakhir.Value.Date < tglawal.Value.Date)
+            {
+                MessageBox.Show("Tanggal yang dimasukan tidak benar");
+            }
+            else
+            {
+                if (cari.Text == string.Empty)
+                {
+                    SearchTanggal();
+                }
+                else
+                {
+                    Search();
+                }
+            }
+        }
+        void SearchTanggal()
+        {
             try
             {
-                using (MySqlConnection conn = new MySqlConnection("datasource=127.0.0.1;port=3306;username=root;password=;database=nopas"))
-                {
-                    conn.Open();
-                    using (DataTable dt = new DataTable("transactions"))
-                    {
-                        using (MySqlCommand cmd = new MySqlCommand("SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
-                                                                   "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
-                                                                   "FROM transactions t " +
-                                                                   "JOIN products p ON t.id_produk = p.id " +
-                                                                   "WHERE DATE(t.created_at) BETWEEN DATE(@fromdate) AND DATE(@todate) " +
-                                                                   "ORDER BY t.created_at ASC", conn))
-                        {
-                            cmd.Parameters.AddWithValue("@fromdate", tglawal.Value.ToString("yyyy-MM-dd"));
-                            cmd.Parameters.AddWithValue("@todate", tglakhir.Value.ToString("yyyy-MM-dd"));
+                // Inisialisasi koneksi di luar blok using
+                koneksi.Open();
 
-                            using (MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd))
-                            {
-                                mySqlDataAdapter.Fill(dt);
-                                dataGridTransaksi.DataSource = dt;
-                            }
-                        }
-                    }
-                }
+                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+                               "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
+                               "FROM transactions t " +
+                               "JOIN products p ON t.id_produk = p.id " +
+                               "WHERE t.created_at BETWEEN @startDate AND @endDate";
+                MySqlCommand command = new MySqlCommand(query, koneksi);
+                command.Parameters.AddWithValue("@startDate", tglawal.Value.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@endDate", tglakhir.Value.AddDays(1).ToString("yyyy-MM-dd"));
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataSet dataset = new DataSet();
+                adapter.Fill(dataset);
+
+                dataGridTransaksi.DataSource = dataset.Tables[0];
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Tutup koneksi di blok finally untuk memastikan koneksi ditutup setelah digunakan
+                koneksi.Close();
             }
         }
+        void Search()
+        {
+            try
+            {
+                koneksi.Open();
+
+                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+                               "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
+                               "FROM transactions t " +
+                               "JOIN products p ON t.id_produk = p.id " +
+                               "WHERE t.created_at BETWEEN @startDate AND @endDate AND p.nama_produk LIKE @namaProduk";
+                MySqlCommand command = new MySqlCommand(query, koneksi);
+                command.Parameters.AddWithValue("@startDate", tglawal.Value.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@endDate", tglakhir.Value.AddDays(1).ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@namaProduk", "%" + cari.Text + "%");
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataSet dataset = new DataSet();
+                adapter.Fill(dataset);
+
+                dataGridTransaksi.DataSource = dataset.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                koneksi.Close();
+            }
+        }
+
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -160,64 +207,6 @@ namespace NOPAS
                 // Membuka dokumen
                 doc.Open();
 
-                string query;
-
-                if (filterTanggalDipilih() && !string.IsNullOrWhiteSpace(nampro.Text))
-                {
-                    // Jika ya, gunakan rentang tanggal dan nama produk yang dipilih
-                    DateTime startDate = tglawal.Value.Date;
-                    DateTime endDate = tglakhir.Value.Date.AddDays(1); // Tambah 1 hari agar mencakup seluruh tanggal di hari terakhir
-                    string formattedStartDate = startDate.ToString("yyyy-MM-dd");
-                    string formattedEndDate = endDate.ToString("yyyy-MM-dd");
-                    string namaProdukFilter = nampro.Text.Trim();
-
-                    query = $"SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
-                            $"t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
-                            $"FROM transactions t " +
-                            $"JOIN products p ON t.id_produk = p.id " +
-                            $"WHERE t.created_at >= '{formattedStartDate}' AND t.created_at < '{formattedEndDate}' AND p.nama_produk LIKE '%{namaProdukFilter}%' " +
-                            $"ORDER BY t.created_at ASC";
-                }
-                else if (filterTanggalDipilih())
-                {
-                    // Jika hanya filter tanggal yang dipilih
-                    DateTime startDate = tglawal.Value.Date;
-                    DateTime endDate = tglakhir.Value.Date.AddDays(1); // Tambah 1 hari agar mencakup seluruh tanggal di hari terakhir
-                    string formattedStartDate = startDate.ToString("yyyy-MM-dd");
-                    string formattedEndDate = endDate.ToString("yyyy-MM-dd");
-
-                    query = $"SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
-                            $"t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
-                            $"FROM transactions t " +
-                            $"JOIN products p ON t.id_produk = p.id " +
-                            $"WHERE t.created_at >= '{formattedStartDate}' AND t.created_at < '{formattedEndDate}' " +
-                            $"ORDER BY t.created_at ASC";
-                }
-                else if (!string.IsNullOrWhiteSpace(nampro.Text))
-                {
-                    // Jika hanya nama produk yang dipilih
-                    string namaProdukFilter = nampro.Text.Trim();
-
-                    query = $"SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
-                            $"t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
-                            $"FROM transactions t " +
-                            $"JOIN products p ON t.id_produk = p.id " +
-                            $"WHERE p.nama_produk LIKE '%{namaProdukFilter}%' " +
-                            $"ORDER BY t.created_at ASC";
-                }
-                else
-                {
-                    // Jika tidak ada filter tanggal atau nama produk
-                    query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
-                            "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
-                            "FROM transactions t " +
-                            "JOIN products p ON t.id_produk = p.id " +
-                            "ORDER BY t.created_at ASC";
-                }
-
-
-                l.showData(query, dataGridTransaksi); 
-
                 // Membuat table dengan jumlah kolom sesuai dengan jumlah kolom di dalam DataGridView
                 PdfPTable table = new PdfPTable(dataGridTransaksi.Columns.Count);
 
@@ -269,6 +258,7 @@ namespace NOPAS
 
                 // Membuka file PDF setelah disimpan
                 Process.Start(saveFileDialog1.FileName);
+                
             }
         }
         private bool filterTanggalDipilih()
@@ -286,6 +276,22 @@ namespace NOPAS
         {
             tgl2 = tglakhir.Value;
             tglS2 = tgl2.ToString("yyyy-MM-dd");
+        }
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+                          "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
+                          "FROM transactions t " +
+                          "JOIN products p ON t.id_produk = p.id " +
+                          "ORDER BY t.created_at ASC";
+
+            l.showData(query, dataGridTransaksi);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.cetak = new System.Windows.Forms.Button();
             this.uangkembali = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.cari = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dghistori = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -150,12 +150,25 @@
             this.panel2.Size = new System.Drawing.Size(875, 648);
             this.panel2.TabIndex = 2;
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Maroon;
+            this.button2.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.button2.Location = new System.Drawing.Point(394, 331);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(201, 39);
+            this.button2.TabIndex = 45;
+            this.button2.Text = "Reset";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // cetak
             // 
             this.cetak.BackColor = System.Drawing.Color.Maroon;
             this.cetak.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cetak.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.cetak.Location = new System.Drawing.Point(622, 249);
+            this.cetak.Location = new System.Drawing.Point(628, 311);
             this.cetak.Name = "cetak";
             this.cetak.Size = new System.Drawing.Size(205, 45);
             this.cetak.TabIndex = 2;
@@ -262,7 +275,7 @@
             this.panel3.Controls.Add(this.nampel);
             this.panel3.Controls.Add(this.label11);
             this.panel3.Controls.Add(this.cbpasvaf);
-            this.panel3.Location = new System.Drawing.Point(27, 137);
+            this.panel3.Location = new System.Drawing.Point(60, 130);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(296, 265);
             this.panel3.TabIndex = 32;
@@ -329,7 +342,7 @@
             // 
             this.cblkbb.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cblkbb.FormattingEnabled = true;
-            this.cblkbb.Location = new System.Drawing.Point(27, 96);
+            this.cblkbb.Location = new System.Drawing.Point(27, 84);
             this.cblkbb.Name = "cblkbb";
             this.cblkbb.Size = new System.Drawing.Size(329, 33);
             this.cblkbb.TabIndex = 31;
@@ -338,7 +351,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(23, 69);
+            this.label5.Location = new System.Drawing.Point(23, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 24);
             this.label5.TabIndex = 30;
@@ -367,7 +380,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 18F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(39, 19);
+            this.label3.Location = new System.Drawing.Point(18, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(301, 46);
             this.label3.TabIndex = 4;
@@ -377,27 +390,14 @@
             // 
             this.dghistori.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dghistori.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dghistori.Location = new System.Drawing.Point(27, 420);
+            this.dghistori.Location = new System.Drawing.Point(27, 405);
             this.dghistori.Name = "dghistori";
             this.dghistori.RowHeadersWidth = 62;
             this.dghistori.RowTemplate.Height = 28;
-            this.dghistori.Size = new System.Drawing.Size(826, 210);
+            this.dghistori.Size = new System.Drawing.Size(826, 225);
             this.dghistori.TabIndex = 3;
             this.dghistori.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dghistori_CellClick);
             this.dghistori.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Maroon;
-            this.button2.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button2.Location = new System.Drawing.Point(624, 297);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 39);
-            this.button2.TabIndex = 45;
-            this.button2.Text = "Reset";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // historitransaksi
             // 

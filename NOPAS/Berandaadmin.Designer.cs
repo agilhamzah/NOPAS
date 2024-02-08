@@ -64,6 +64,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(349, 514);
             this.panel1.TabIndex = 5;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // lbnama
             // 
@@ -125,7 +126,7 @@
             this.panel5.BackColor = System.Drawing.Color.Maroon;
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.pictureBox4);
-            this.panel5.Location = new System.Drawing.Point(475, 189);
+            this.panel5.Location = new System.Drawing.Point(487, 163);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(339, 126);
             this.panel5.TabIndex = 18;
@@ -158,7 +159,7 @@
             this.panel4.BackColor = System.Drawing.Color.Maroon;
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.pictureBox3);
-            this.panel4.Location = new System.Drawing.Point(75, 188);
+            this.panel4.Location = new System.Drawing.Point(71, 163);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(339, 127);
             this.panel4.TabIndex = 18;
@@ -189,9 +190,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(248, 327);
+            this.pictureBox2.Location = new System.Drawing.Point(386, 327);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(624, 330);
+            this.pictureBox2.Size = new System.Drawing.Size(486, 330);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;

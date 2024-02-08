@@ -72,17 +72,17 @@ namespace NOPAS
             }
             else
             {
-                DialogResult result = MessageBox.Show("Anda yakin ingin mengubah user ini?", "Konfirmasi", MessageBoxButtons.YesNo);
-
+                // Logika mode tambah
+                DialogResult result = MessageBox.Show("Anda yakin ingin menambah user?", "Konfirmasi", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No)
                 {
                     clear();
                 }
-                if (isEditMode)
+
+                if (result == DialogResult.Yes)
                 {
-                    // Logika mode edit
-                    u.command("insert into log (id_user, activity, created_at) VALUES ('" + Data.id_user + "', 'Admin Mengubah user', NOW())");
-                    MessageBox.Show("Anda telah mengubah user", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    u.command("insert into log (id_user, activity, created_at) VALUES ('" + Data.id_user + "', 'Admin Menambahkan user', NOW())");
+                    MessageBox.Show("Anda telah menambahkan user", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     if (username.Text == string.Empty || pw.Text == string.Empty || namleng.Text == string.Empty || role.Text == string.Empty)
                     {
@@ -90,11 +90,14 @@ namespace NOPAS
                     }
                     else
                     {
-                        u.command("update users set username = '" + username.Text + "', password = '" + pw.Text + "', nama = '" + namleng.Text + "', role = '" + role.Text + "', updated_at = NOW() where id = '" + id + "' ");
+                        string query = "INSERT INTO users ( username, password, nama_lengakp, role, created_at) VALUES ( '" + username.Text + "', '" + pw.Text + "', '" + namleng.Text + "', '" + role.Text + "', NOW() )";
+                        u.command(query);
                         clear();
-                        isEditMode = false;
-                        tambah.Text = "Tambah";
                     }
+                }
+                else
+                {
+                    clear();
                 }
             }
         }
@@ -151,6 +154,9 @@ namespace NOPAS
                     MessageBox.Show("User berhasil di hapus", "informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     u.command("insert into log (id_user, activity, created_at) VALUES('" + Data.id_user + "', 'Admin menghapus user', NOW())");
                     clear();
+
+                    isEditMode = false;
+                    tambah.Text = "Tambah";
                 }
             }
         }

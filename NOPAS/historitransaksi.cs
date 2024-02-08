@@ -217,5 +217,10 @@ namespace NOPAS
         {
             clear();
         }
+
+        private void hapus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
