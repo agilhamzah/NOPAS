@@ -113,7 +113,7 @@ namespace NOPAS
                 koneksi.Close();
             }
         }
-        void Search()
+        void Search(bool filterTanggal = false)
         {
             try
             {
@@ -122,12 +122,26 @@ namespace NOPAS
                 string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
                                "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
                                "FROM transactions t " +
-                               "JOIN products p ON t.id_produk = p.id " +
-                               "WHERE t.created_at BETWEEN @startDate AND @endDate AND p.nama_produk LIKE @namaProduk";
+                               "JOIN products p ON t.id_produk = p.id ";
+
+                if (filterTanggal)
+                {
+                    query += "WHERE t.created_at BETWEEN @startDate AND @endDate AND p.nama_produk LIKE @namaProduk";
+                }
+                else
+                {
+                    query += "WHERE p.nama_produk LIKE @namaProduk";
+                }
+
                 MySqlCommand command = new MySqlCommand(query, koneksi);
-                command.Parameters.AddWithValue("@startDate", tglawal.Value.ToString("yyyy-MM-dd"));
-                command.Parameters.AddWithValue("@endDate", tglakhir.Value.AddDays(1).ToString("yyyy-MM-dd"));
                 command.Parameters.AddWithValue("@namaProduk", "%" + cari.Text + "%");
+
+                if (filterTanggal)
+                {
+                    command.Parameters.AddWithValue("@startDate", tglawal.Value.ToString("yyyy-MM-dd"));
+                    command.Parameters.AddWithValue("@endDate", tglakhir.Value.AddDays(1).ToString("yyyy-MM-dd"));
+                }
+
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 DataSet dataset = new DataSet();
                 adapter.Fill(dataset);
@@ -143,7 +157,6 @@ namespace NOPAS
                 koneksi.Close();
             }
         }
-
 
         private void label3_Click(object sender, EventArgs e)
         {

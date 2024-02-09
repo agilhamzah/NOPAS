@@ -282,6 +282,7 @@ namespace NOPAS
                 if (uangBayar < totalHarga)
                 {
                     MessageBox.Show("Uang bayar kurang dari total harga.");
+                    uangbyr.Text = "";
                     return;
                 }
                 MySqlCommand insertTransaksiCommand = new MySqlCommand("INSERT INTO transactions (id_produk, nama_pelanggan, qty, vote_pasukan, nomor_unik, uang_bayar, uang_kembali, total_harga, created_at) VALUES (@idProduk, @namaPelanggan, @qty, @votePasukan, @nomorUnik, @uangBayar, @uangKembalian, @totalHarga, NOW())", conn);

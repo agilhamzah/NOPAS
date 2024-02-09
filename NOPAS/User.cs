@@ -90,7 +90,7 @@ namespace NOPAS
                     }
                     else
                     {
-                        string query = "INSERT INTO users ( username, password, nama_lengakp, role, created_at) VALUES ( '" + username.Text + "', '" + pw.Text + "', '" + namleng.Text + "', '" + role.Text + "', NOW() )";
+                        string query = "INSERT INTO users ( username, password, nama, role, created_at) VALUES ( '" + username.Text + "', '" + pw.Text + "', '" + namleng.Text + "', '" + role.Text + "', NOW() )";
                         u.command(query);
                         clear();
                     }

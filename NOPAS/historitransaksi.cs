@@ -28,16 +28,7 @@ namespace NOPAS
 
         void clear()
         {
-           id = string.Empty;
-            cblkbb.Text = string.Empty;
-            nomorunik.Text = string.Empty;
-            nampel.Text = string.Empty;
-            cbpasvaf.Text = string.Empty;
-            harsat.Text = string.Empty;
-            quantitas.Text = string.Empty;
-            total.Text = string.Empty;
-            uangbyr.Text = string.Empty;
-            uangkembali.Text = string.Empty;
+          
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -122,22 +113,62 @@ namespace NOPAS
         {
 
         }
+        private DataGridViewRow selectedRow;
+        private void setDataToStruk(string namaPelanggan, DataGridViewRow dr, CrystalReport2 cr1)
+        {
+            // Mengatur tanggal pembelian pada struk
+            using (MySqlConnection conn = new MySqlConnection("datasource=127.0.0.1;port=3306;username=root;password=;database=nopas"))
+            {
+                conn.Open();
+                MySqlCommand getDateCommand = new MySqlCommand("SELECT created_at FROM transactions WHERE nama_pelanggan = @namapelanggan", conn);
+                getDateCommand.Parameters.AddWithValue("@namapelanggan", namaPelanggan);
+
+                using (MySqlDataReader dateReader = getDateCommand.ExecuteReader())
+                {
+                    if (dateReader.Read())
+                    {
+                        DateTime tanggalPembelian = dateReader.GetDateTime(0);
+                        TextObject tanggalB = (TextObject)cr1.ReportDefinition.Sections["Section2"].ReportObjects["tanggalb"];
+                        tanggalB.Text = " " + tanggalPembelian.ToString("dd/MM/yyyy");
+                    }
+                }
+            }
+
+            // Mengatur nilai-nilai lainnya pada struk langsung dari DataGridViewRow
+            TextObject namapel = (TextObject)cr1.ReportDefinition.Sections["Section2"].ReportObjects["nampel"];
+            namapel.Text = namaPelanggan;
+
+            TextObject nounik = (TextObject)cr1.ReportDefinition.Sections["Section2"].ReportObjects["nounik"];
+            nounik.Text = dr.Cells["nomor_unik"].Value.ToString();
+            TextObject namapro = (TextObject)cr1.ReportDefinition.Sections["Section3"].ReportObjects["nampro"];
+            namapro.Text = dr.Cells["nama_produk"].Value.ToString();
+            TextObject harga = (TextObject)cr1.ReportDefinition.Sections["Section3"].ReportObjects["harga"];
+            harga.Text = dr.Cells["harga_produk"].Value.ToString();
+            TextObject Qty = (TextObject)cr1.ReportDefinition.Sections["Section3"].ReportObjects["jumlah"];
+            Qty.Text = dr.Cells["qty"].Value.ToString();
+            TextObject totalh = (TextObject)cr1.ReportDefinition.Sections["Section4"].ReportObjects["totalh"];
+            totalh.Text = dr.Cells["total_harga"].Value.ToString();
+            TextObject uangb = (TextObject)cr1.ReportDefinition.Sections["Section4"].ReportObjects["uangb"];
+            uangb.Text = dr.Cells["uang_bayar"].Value.ToString();
+            TextObject kembali = (TextObject)cr1.ReportDefinition.Sections["Section4"].ReportObjects["kembali"];
+            kembali.Text = dr.Cells["uang_kembali"].Value.ToString();
+        }
+
 
         private void dghistori_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow dr = this.dghistori.Rows[e.RowIndex];
-
-            cblkbb.Text = dr.Cells[1].Value.ToString();
-            nomorunik.Text = dr.Cells[6].Value.ToString();
-            nampel.Text = dr.Cells[3].Value.ToString();
-            cbpasvaf.Text = dr.Cells[5].Value.ToString();
-            harsat.Text = dr.Cells[2].Value.ToString();
-            quantitas.Text = dr.Cells[4].Value.ToString();
-            total.Text = dr.Cells[9].Value.ToString();
-            uangbyr.Text = dr.Cells[7].Value.ToString();
-            uangkembali.Text = dr.Cells[8].Value.ToString();
-
-            id = dr.Cells[0].Value.ToString();
+            try
+            {
+                // Simpan baris yang dipilih saat sel di DataGridView diklik
+                if (e.RowIndex >= 0)
+                {
+                    selectedRow = dghistori.Rows[e.RowIndex];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void batal_Click(object sender, EventArgs e)
@@ -149,63 +180,22 @@ namespace NOPAS
         {
             try
             {
-                string namaPelanggan = nampel.Text;
-                string namaProduk = cblkbb.Text;
-                string votePasukan = cbpasvaf.Text;
-                decimal qty = decimal.Parse(quantitas.Text);
-                decimal totalHarga = decimal.Parse(total.Text);
-                decimal uangBayar = decimal.Parse(uangbyr.Text);
-                decimal uangKembali = decimal.Parse(uangkembali.Text);
-                decimal hargaSatuan = decimal.Parse(harsat.Text);
-               
-               
-                MessageBox.Show("cetak struk", "informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                laporan frm = new laporan();
-                CrystalReport2 cr1 = new CrystalReport2();
-                // Mendapatkan tanggal pembelian dari database
-                using (MySqlConnection conn = new MySqlConnection("datasource=127.0.0.1;port=3306;username=root;password=;database=nopas"))
+                if (selectedRow != null)
                 {
-                    conn.Open();
-                    MySqlCommand getDateCommand = new MySqlCommand("SELECT created_at FROM transactions WHERE nama_pelanggan = @namapelanggan", conn);
-                    getDateCommand.Parameters.AddWithValue("@namapelanggan", namaPelanggan);
+                    string namaPelanggan = selectedRow.Cells["nama_pelanggan"].Value.ToString();
 
-                    using (MySqlDataReader dateReader = getDateCommand.ExecuteReader())
-                    {
-                        if (dateReader.Read())
-                        {
-                            DateTime tanggalPembelian = dateReader.GetDateTime(0);
-                            // Mengatur tanggal pembelian pada struk
-                            TextObject tanggalB = (TextObject)cr1.ReportDefinition.Sections["Section2"].ReportObjects["tanggalb"];
-                            tanggalB.Text = " " + tanggalPembelian.ToString("dd/MM/yyyy");
-                        }
-                    }
+                    laporan frm = new laporan();
+                    CrystalReport2 cr1 = new CrystalReport2();
+
+                    setDataToStruk(namaPelanggan, selectedRow, cr1);
+
+                    frm.crystalReportViewer1.ReportSource = cr1;
+                    frm.Show();
                 }
-
-                // Mengatur nilai-nilai lainnya pada struk
-                TextObject namapel = (TextObject)cr1.ReportDefinition.Sections["Section2"].ReportObjects["nampel"];
-                namapel.Text = nampel.Text;
-                TextObject nounik = (TextObject)cr1.ReportDefinition.Sections["Section2"].ReportObjects["nounik"];
-                nounik.Text = nomorunik.Text; // Atur nomor unik sesuai dengan yang dihasilkan sebelumnya
-                TextObject namapro = (TextObject)cr1.ReportDefinition.Sections["Section3"].ReportObjects["nampro"];
-                namapro.Text = cblkbb.Text;
-                TextObject harga = (TextObject)cr1.ReportDefinition.Sections["Section3"].ReportObjects["harga"];
-                harga.Text = harsat.Text;
-                TextObject Qty = (TextObject)cr1.ReportDefinition.Sections["Section3"].ReportObjects["jumlah"];
-                Qty.Text = quantitas.Text;
-                TextObject totalh = (TextObject)cr1.ReportDefinition.Sections["Section4"].ReportObjects["totalh"];
-                totalh.Text = total.Text;
-                TextObject uangb = (TextObject)cr1.ReportDefinition.Sections["Section4"].ReportObjects["uangb"];
-                uangb.Text = uangbyr.Text;
-                TextObject kembali = (TextObject)cr1.ReportDefinition.Sections["Section4"].ReportObjects["kembali"];
-                kembali.Text = uangkembali.Text;
-
-                // Menampilkan form laporan dengan struk yang telah disiapkan
-                frm.crystalReportViewer1.ReportSource = cr1;
-                frm.Show();
-
-                // Membersihkan nilai-nilai pada form setelah mencetak struk
-                clear();
+                else
+                {
+                    MessageBox.Show("Pilih data terlebih dahulu.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -219,6 +209,11 @@ namespace NOPAS
         }
 
         private void hapus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
