@@ -36,7 +36,7 @@
             this.nomorunik = new System.Windows.Forms.TextBox();
             this.nampel = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.cbpasvaf = new System.Windows.Forms.ComboBox();
+            this.cbday = new System.Windows.Forms.ComboBox();
             this.datastok = new System.Windows.Forms.DataGridView();
             this.uangkembali = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -99,7 +99,7 @@
             this.panel3.Controls.Add(this.nomorunik);
             this.panel3.Controls.Add(this.nampel);
             this.panel3.Controls.Add(this.label11);
-            this.panel3.Controls.Add(this.cbpasvaf);
+            this.panel3.Controls.Add(this.cbday);
             this.panel3.Location = new System.Drawing.Point(41, 211);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(296, 271);
@@ -110,7 +110,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(17, 22);
+            this.label16.Location = new System.Drawing.Point(27, 101);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(112, 27);
             this.label16.TabIndex = 24;
@@ -121,7 +121,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(17, 102);
+            this.label6.Location = new System.Drawing.Point(27, 185);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(155, 27);
             this.label6.TabIndex = 6;
@@ -131,7 +131,7 @@
             // nomorunik
             // 
             this.nomorunik.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nomorunik.Location = new System.Drawing.Point(22, 56);
+            this.nomorunik.Location = new System.Drawing.Point(32, 135);
             this.nomorunik.Name = "nomorunik";
             this.nomorunik.Size = new System.Drawing.Size(237, 34);
             this.nomorunik.TabIndex = 7;
@@ -140,7 +140,7 @@
             // nampel
             // 
             this.nampel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nampel.Location = new System.Drawing.Point(22, 134);
+            this.nampel.Location = new System.Drawing.Point(32, 217);
             this.nampel.Name = "nampel";
             this.nampel.Size = new System.Drawing.Size(237, 34);
             this.nampel.TabIndex = 11;
@@ -151,22 +151,22 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(17, 178);
+            this.label11.Location = new System.Drawing.Point(27, 18);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(190, 27);
+            this.label11.Size = new System.Drawing.Size(43, 27);
             this.label11.TabIndex = 16;
-            this.label11.Text = "Vote Pasukan Favorit";
+            this.label11.Text = "Day";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
-            // cbpasvaf
+            // cbday
             // 
-            this.cbpasvaf.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbpasvaf.FormattingEnabled = true;
-            this.cbpasvaf.Location = new System.Drawing.Point(22, 209);
-            this.cbpasvaf.Name = "cbpasvaf";
-            this.cbpasvaf.Size = new System.Drawing.Size(237, 35);
-            this.cbpasvaf.TabIndex = 17;
-            this.cbpasvaf.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            this.cbday.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbday.FormattingEnabled = true;
+            this.cbday.Location = new System.Drawing.Point(32, 49);
+            this.cbday.Name = "cbday";
+            this.cbday.Size = new System.Drawing.Size(237, 35);
+            this.cbday.TabIndex = 17;
+            this.cbday.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // datastok
             // 
@@ -423,7 +423,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox uangbyr;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cbpasvaf;
+        private System.Windows.Forms.ComboBox cbday;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox quantitas;
         private System.Windows.Forms.TextBox harsat;

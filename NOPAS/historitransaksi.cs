@@ -17,7 +17,7 @@ namespace NOPAS
 {
     public partial class historitransaksi : Form
     {
-        string id;
+        
 
         MySqlConnection conn = new MySqlConnection("datasource=127.0.0.1;port=3306;username=root;password=;database=nopas");
         Data h = new Data();
@@ -44,7 +44,7 @@ namespace NOPAS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
                             "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
                             "FROM transactions t " +
                             "JOIN products p ON t.id_produk = p.id " +
@@ -62,7 +62,7 @@ namespace NOPAS
                 {
                     connection.Open();
 
-                    string query = "SELECT id_produk, nama_pelanggan, qty, vote_pasukan, nomor_unik, uang_bayar, uang_kembali, total_harga, created_at FROM transactions";
+                    string query = "SELECT id_produk, nama_pelanggan, qty, days, nomor_unik, uang_bayar, uang_kembali, total_harga, created_at FROM transactions";
                     MySqlCommand command = new MySqlCommand(query, connection);
 
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -94,7 +94,7 @@ namespace NOPAS
 
             if (!string.IsNullOrEmpty(keyword))
             {
-                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
                                "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
                                "FROM transactions t " +
                                "JOIN products p ON t.id_produk = p.id " +

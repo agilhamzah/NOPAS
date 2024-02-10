@@ -60,6 +60,6 @@
         #endregion
 
         public CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
-        private CrystalReport2 CrystalReport2;
+        private CrystalReport2 CrystalReport1;
     }
 }

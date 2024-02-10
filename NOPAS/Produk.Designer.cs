@@ -36,7 +36,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.jumpes = new System.Windows.Forms.TextBox();
+            this.day = new System.Windows.Forms.TextBox();
             this.cari = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.hapus = new System.Windows.Forms.Button();
@@ -115,7 +115,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.jumpes);
+            this.panel2.Controls.Add(this.day);
             this.panel2.Controls.Add(this.cari);
             this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Controls.Add(this.hapus);
@@ -145,12 +145,12 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "Cari";
             // 
-            // jumpes
+            // day
             // 
-            this.jumpes.Location = new System.Drawing.Point(484, 199);
-            this.jumpes.Name = "jumpes";
-            this.jumpes.Size = new System.Drawing.Size(242, 26);
-            this.jumpes.TabIndex = 18;
+            this.day.Location = new System.Drawing.Point(484, 199);
+            this.day.Name = "day";
+            this.day.Size = new System.Drawing.Size(242, 26);
+            this.day.TabIndex = 18;
             // 
             // cari
             // 
@@ -217,9 +217,9 @@
             this.label7.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 10F);
             this.label7.Location = new System.Drawing.Point(479, 170);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(132, 24);
+            this.label7.Size = new System.Drawing.Size(48, 24);
             this.label7.TabIndex = 10;
-            this.label7.Text = "Jumlah Peserta";
+            this.label7.Text = "Days";
             // 
             // stok
             // 
@@ -326,7 +326,7 @@
         private System.Windows.Forms.TextBox namproduk;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox jumpes;
+        private System.Windows.Forms.TextBox day;
         private System.Windows.Forms.Label label2;
     }
 }

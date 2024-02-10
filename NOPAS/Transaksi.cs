@@ -19,7 +19,6 @@ namespace NOPAS
         MySqlConnection conn = new MySqlConnection("datasource=127.0.0.1;port=3306;username=root;password=;database=nopas");
 
         Data t = new Data();
-        historitransaksi form1 = new historitransaksi();
 
         void clear()
         {
@@ -31,7 +30,7 @@ namespace NOPAS
             total.Text = string.Empty;
             uangbyr.Text = string.Empty;
             uangkembali.Text = string.Empty;
-            cbpasvaf.Text = string.Empty;
+            cbday.Text = string.Empty;
 
             t.showData("Select * from products", datastok);
             IsiNomorUnikOtomatis();
@@ -42,6 +41,44 @@ namespace NOPAS
             InitializeComponent();
             FillComboBox();
         }
+        private void FillComboBox()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection("server=127.0.0.1;port=3306;username=root;password=;database=nopas"))
+                {
+                    conn.Open();
+
+                    MySqlCommand cmd = new MySqlCommand("SELECT days FROM products WHERE nama_produk = @nama_produk", conn);
+                    cmd.Parameters.AddWithValue("@nama_produk", cblkbb.Text);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        string daysString = reader["days"].ToString();
+
+                        if (!string.IsNullOrEmpty(daysString))
+                        {
+                            string[] daysArray = daysString.Split(',');
+
+                            foreach (string day in daysArray)
+                            {
+                                cbday.Items.Add("Day " + day.Trim());
+                            }
+                        }
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
 
         private void UpdateKembalianOtomatis(object sender, EventArgs e)
         {
@@ -110,43 +147,6 @@ namespace NOPAS
         private void label11_Click(object sender, EventArgs e)
         {
 
-        }
-        private void FillComboBox()
-        {
-            try
-            {
-
-                using (MySqlConnection conn = new MySqlConnection("server=127.0.0.1;port=3306;username=root;password=;database=nopas"))
-                {
-                    conn.Open();
-
-                    if (cbpasvaf.Text != "")
-                    {
-                        MySqlCommand cmd = new MySqlCommand("SELECT jumlah_peserta FROM products WHERE jumlah_peserta = @jumlah_peserta", conn);
-                        cmd.Parameters.AddWithValue("@jumlah_peserta", cbpasvaf.Text);
-
-                        MySqlDataReader reader = cmd.ExecuteReader();
-
-                        if (reader.Read())
-                        {
-                            int jumlahPeserta = Convert.ToInt32(reader["jumlah_peserta"]);
-
-                            cbpasvaf.Items.Clear();
-
-                            for (int i = 1; i <= jumlahPeserta; i++)
-                            {
-                                cbpasvaf.Items.Add(i);
-                            }
-                        }
-
-                        reader.Close();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -217,7 +217,7 @@ namespace NOPAS
 
         private void btnpesan_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nampel.Text) || string.IsNullOrWhiteSpace(cblkbb.Text) || string.IsNullOrWhiteSpace(cbpasvaf.Text) ||
+            if (string.IsNullOrWhiteSpace(nampel.Text) || string.IsNullOrWhiteSpace(cblkbb.Text) || string.IsNullOrWhiteSpace(cbday.Text) ||
                 string.IsNullOrWhiteSpace(quantitas.Text) || string.IsNullOrWhiteSpace(total.Text) || string.IsNullOrWhiteSpace(uangbyr.Text) ||
                 string.IsNullOrWhiteSpace(uangkembali.Text) || string.IsNullOrWhiteSpace(harsat.Text))
             {
@@ -227,7 +227,7 @@ namespace NOPAS
 
             string namaPelanggan = nampel.Text;
             string namaProduk = cblkbb.Text;
-            string votePasukan = cbpasvaf.Text;
+            string days = cbday.Text;
             decimal qty = decimal.Parse(quantitas.Text);
             decimal totalHarga = decimal.Parse(total.Text);
             decimal uangBayar = decimal.Parse(uangbyr.Text);
@@ -285,11 +285,11 @@ namespace NOPAS
                     uangbyr.Text = "";
                     return;
                 }
-                MySqlCommand insertTransaksiCommand = new MySqlCommand("INSERT INTO transactions (id_produk, nama_pelanggan, qty, vote_pasukan, nomor_unik, uang_bayar, uang_kembali, total_harga, created_at) VALUES (@idProduk, @namaPelanggan, @qty, @votePasukan, @nomorUnik, @uangBayar, @uangKembalian, @totalHarga, NOW())", conn);
+                MySqlCommand insertTransaksiCommand = new MySqlCommand("INSERT INTO transactions (id_produk, nama_pelanggan, qty, days, nomor_unik, uang_bayar, uang_kembali, total_harga, created_at) VALUES (@idProduk, @namaPelanggan, @qty, @days, @nomorUnik, @uangBayar, @uangKembalian, @totalHarga, NOW())", conn);
                 insertTransaksiCommand.Parameters.AddWithValue("@idProduk", idProduk);
                 insertTransaksiCommand.Parameters.AddWithValue("@namaPelanggan", namaPelanggan);
                 insertTransaksiCommand.Parameters.AddWithValue("@qty", qty);
-                insertTransaksiCommand.Parameters.AddWithValue("@votePasukan", votePasukan);
+                insertTransaksiCommand.Parameters.AddWithValue("@days", days);
                 insertTransaksiCommand.Parameters.AddWithValue("@nomorUnik", nomorUnik);
                 insertTransaksiCommand.Parameters.AddWithValue("@uangBayar", uangBayar);
                 insertTransaksiCommand.Parameters.AddWithValue("@uangKembalian", uangKembali);
@@ -368,31 +368,38 @@ namespace NOPAS
 
                 reader.Close();
 
-                MySqlCommand cmdJumlahPeserta = new MySqlCommand("SELECT jumlah_peserta FROM products WHERE nama_produk = @nama_produk", conn);
-                cmdJumlahPeserta.Parameters.AddWithValue("@nama_produk", cblkbb.Text);
+                MySqlCommand cmdDays = new MySqlCommand("SELECT days FROM products WHERE nama_produk = @nama_produk", conn);
+                cmdDays.Parameters.AddWithValue("@nama_produk", cblkbb.Text);
 
-                MySqlDataReader readerJumlahPeserta = cmdJumlahPeserta.ExecuteReader();
+                MySqlDataReader readerDays = cmdDays.ExecuteReader();
 
-                int jumlahPeserta = 0;
+                string daysString = ""; // Simpan sebagai string
 
-                if (readerJumlahPeserta.Read())
+                if (readerDays.Read())
                 {
-                    jumlahPeserta = readerJumlahPeserta.GetInt32(0);
+                    daysString = readerDays.GetString(0); // Ambil nilai sebagai string
                 }
 
-                readerJumlahPeserta.Close();
+                readerDays.Close(); // Tutup reader setelah membaca
 
-                cbpasvaf.Items.Clear();
+                cbday.Items.Clear();
 
-                for (int i = 1; i <= jumlahPeserta; i++)
+                if (!string.IsNullOrEmpty(daysString))
                 {
-                    cbpasvaf.Items.Add(i.ToString());
+                    // Jika nilai daysString tidak kosong
+                    int totalDays = int.Parse(daysString);
+
+                    for (int i = 1; i <= totalDays; i++)
+                    {
+                        cbday.Items.Add("Day " + i); // Tambahkan setiap hari ke combobox
+                    }
                 }
 
-                if (cbpasvaf.Items.Count > 0)
+                if (cbday.Items.Count > 0)
                 {
-                    cbpasvaf.SelectedIndex = 0;
+                    cbday.SelectedIndex = 0;
                 }
+
 
                 conn.Close();
             }

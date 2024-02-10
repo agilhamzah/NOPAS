@@ -37,7 +37,7 @@ namespace NOPAS
 
         private void datatransaksi_Load(object sender, EventArgs e)
         {
-            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
                            "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
                            "FROM transactions t " +
                            "JOIN products p ON t.id_produk = p.id " +
@@ -89,7 +89,7 @@ namespace NOPAS
                 // Inisialisasi koneksi di luar blok using
                 koneksi.Open();
 
-                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
                                "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
                                "FROM transactions t " +
                                "JOIN products p ON t.id_produk = p.id " +
@@ -119,7 +119,7 @@ namespace NOPAS
             {
                 koneksi.Open();
 
-                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+                string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
                                "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
                                "FROM transactions t " +
                                "JOIN products p ON t.id_produk = p.id ";
@@ -221,12 +221,14 @@ namespace NOPAS
                 doc.Open();
 
                 // Membuat table dengan jumlah kolom sesuai dengan jumlah kolom di dalam DataGridView
-                PdfPTable table = new PdfPTable(dataGridTransaksi.Columns.Count);
+                PdfPTable table = new PdfPTable(6);
+                string[] headers = { "ID", "Nama Produk", "Nomor Unik", "Nama Pelanggan", "Day", "Total" };
+                foreach (string header in headers)
 
-                // Menambahkan header ke dalam table
-                for (int i = 0; i < dataGridTransaksi.Columns.Count; i++)
+                    // Menambahkan header ke dalam table
+                    //for (int i = 0; i < dataGridTransaksi.Columns.Count; i++)
                 {
-                    PdfPCell cell = new PdfPCell(new Phrase(dataGridTransaksi.Columns[i].HeaderText));
+                    PdfPCell cell = new PdfPCell(new Phrase(header));
                     cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                     cell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -236,18 +238,17 @@ namespace NOPAS
                 }
 
                 // Menambahkan data dari DataGridView ke dalam table
-                for (int i = 0; i < dataGridTransaksi.Rows.Count; i++)
+                foreach (DataGridViewRow row in dataGridTransaksi.Rows)
                 {
-                    for (int j = 0; j < dataGridTransaksi.Columns.Count; j++)
-                    {
-                        if (dataGridTransaksi[j, i].Value != null)
+                        if (!row.IsNewRow)
                         {
-                            PdfPCell cell = new PdfPCell(new Phrase(dataGridTransaksi[j, i].Value.ToString()));
-                            cell.Padding = 5;
-                            cell.BorderWidth = 1;
-                            table.AddCell(cell);
+                            table.AddCell(row.Cells[0].Value?.ToString()); // ID
+                            table.AddCell(row.Cells[1].Value?.ToString()); // Nama Produk
+                            table.AddCell(row.Cells[6].Value?.ToString()); // Nomor Unik
+                            table.AddCell(row.Cells[3].Value?.ToString()); // Nama Pelanggan
+                            table.AddCell(row.Cells[5].Value?.ToString()); // Day
+                            table.AddCell(row.Cells[9].Value?.ToString()); // Total
                         }
-                    }
                 }
 
                 // Mengatur garis di sekitar tabel
@@ -293,7 +294,7 @@ namespace NOPAS
 
         private void reset_Click(object sender, EventArgs e)
         {
-            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.vote_pasukan, t.nomor_unik, " +
+            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
                           "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
                           "FROM transactions t " +
                           "JOIN products p ON t.id_produk = p.id " +

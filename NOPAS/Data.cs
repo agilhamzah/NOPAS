@@ -105,6 +105,29 @@ namespace NOPAS
                 conn.Close();
             }
         }
+        public void GetDataDays(ComboBox cb)
+        {
+            try
+            {
+                conn.Open();
+                string query = "SELECT DISTINCT days FROM products";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    cb.Items.Add(reader["days"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public void showDg(string query, DataGridView dgv)
         {
             try

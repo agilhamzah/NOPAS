@@ -26,7 +26,7 @@ namespace NOPAS
             namproduk.Text = string.Empty;
             harproduk.Text = string.Empty;
             stok.Text = string.Empty;
-            jumpes.Text = string.Empty;
+            day.Text = string.Empty;
             p.showData("Select * from products", dataGridView1);
         }
         private void Produk_Load(object sender, EventArgs e)
@@ -55,13 +55,13 @@ namespace NOPAS
                     p.command("insert into log (id_user, activity, created_at) VALUES ('" + Data.id_user + "', 'Admin Mengubah produk', NOW())");
                     MessageBox.Show("Anda telah mengubah produk", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (namproduk.Text == string.Empty || harproduk.Text == string.Empty || stok.Text == string.Empty || jumpes.Text == string.Empty)
+                    if (namproduk.Text == string.Empty || harproduk.Text == string.Empty || stok.Text == string.Empty || day.Text == string.Empty)
                     {
                         MessageBox.Show("Semua kolom harus di isi!");
                     }
                     else
                     {
-                        p.command("update products set nama_produk = '" + namproduk.Text + "', harga_produk = '" + harproduk.Text + "', stok = '" + stok.Text + "', jumlah_peserta = '" + jumpes.Text + "', updated_at = NOW() where id = '" + id + "' ");
+                        p.command("update products set nama_produk = '" + namproduk.Text + "', harga_produk = '" + harproduk.Text + "', stok = '" + stok.Text + "', days = '" + day.Text + "', updated_at = NOW() where id = '" + id + "' ");
                         clear();
                         isEditMode = false;
                         tambah.Text = "Tambah";
@@ -89,13 +89,13 @@ namespace NOPAS
                     p.command("insert into log (id_user, activity, created_at) VALUES ('" + Data.id_user + "', 'Admin Menambahkan produk', NOW())");
                     MessageBox.Show("Anda telah menambahkan produk", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (namproduk.Text == string.Empty || harproduk.Text == string.Empty || stok.Text == string.Empty || jumpes.Text == string.Empty)
+                    if (namproduk.Text == string.Empty || harproduk.Text == string.Empty || stok.Text == string.Empty || day.Text == string.Empty)
                     {
                         MessageBox.Show("Semua kolom harus di isi!");
                     }
                     else
                     {
-                        string query = "INSERT INTO products ( nama_produk, harga_produk, stok, jumlah_peserta, created_at) VALUES ( '" + namproduk.Text + "', '" + harproduk.Text + "', '" + stok.Text + "', '" + jumpes.Text + "', NOW() )";
+                        string query = "INSERT INTO products ( nama_produk, harga_produk, stok, days, created_at) VALUES ( '" + namproduk.Text + "', '" + harproduk.Text + "', '" + stok.Text + "', '" + day.Text + "', NOW() )";
                         p.command(query);
                         clear();
                     }
@@ -140,7 +140,7 @@ namespace NOPAS
             namproduk.Text = dr.Cells[1].Value.ToString();
             harproduk.Text = dr.Cells[2].Value.ToString();
             stok.Text = dr.Cells[3].Value.ToString();
-            jumpes.Text = dr.Cells[4].Value.ToString();
+            day.Text = dr.Cells[4].Value.ToString();
 
             id = dr.Cells[0].Value.ToString();
             isEditMode = true;

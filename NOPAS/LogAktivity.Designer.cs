@@ -43,15 +43,10 @@
             this.datefilter1 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dgproduk = new System.Windows.Forms.DataGridView();
-            this.label6 = new System.Windows.Forms.Label();
-            this.caritxt = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dglogakt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgproduk)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -112,10 +107,6 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.caritxt);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.dgproduk);
-            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.cbrole);
             this.panel2.Controls.Add(this.datefilter2);
@@ -133,7 +124,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.Location = new System.Drawing.Point(597, 123);
+            this.label2.Location = new System.Drawing.Point(696, 174);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 26);
             this.label2.TabIndex = 9;
@@ -145,14 +136,14 @@
             this.cbrole.Items.AddRange(new object[] {
             "admin",
             "kasir"});
-            this.cbrole.Location = new System.Drawing.Point(660, 125);
+            this.cbrole.Location = new System.Drawing.Point(701, 206);
             this.cbrole.Name = "cbrole";
             this.cbrole.Size = new System.Drawing.Size(121, 28);
             this.cbrole.TabIndex = 8;
             // 
             // datefilter2
             // 
-            this.datefilter2.Location = new System.Drawing.Point(312, 123);
+            this.datefilter2.Location = new System.Drawing.Point(316, 139);
             this.datefilter2.Name = "datefilter2";
             this.datefilter2.Size = new System.Drawing.Size(259, 26);
             this.datefilter2.TabIndex = 7;
@@ -162,11 +153,11 @@
             // 
             this.dglogakt.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dglogakt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dglogakt.Location = new System.Drawing.Point(37, 199);
+            this.dglogakt.Location = new System.Drawing.Point(37, 246);
             this.dglogakt.Name = "dglogakt";
             this.dglogakt.RowHeadersWidth = 62;
             this.dglogakt.RowTemplate.Height = 28;
-            this.dglogakt.Size = new System.Drawing.Size(795, 171);
+            this.dglogakt.Size = new System.Drawing.Size(795, 369);
             this.dglogakt.TabIndex = 6;
             this.dglogakt.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dglogakt.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -176,7 +167,7 @@
             this.filterlog.BackColor = System.Drawing.Color.Maroon;
             this.filterlog.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterlog.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.filterlog.Location = new System.Drawing.Point(37, 159);
+            this.filterlog.Location = new System.Drawing.Point(37, 186);
             this.filterlog.Name = "filterlog";
             this.filterlog.Size = new System.Drawing.Size(116, 34);
             this.filterlog.TabIndex = 3;
@@ -186,7 +177,7 @@
             // 
             // datefilter1
             // 
-            this.datefilter1.Location = new System.Drawing.Point(37, 123);
+            this.datefilter1.Location = new System.Drawing.Point(37, 139);
             this.datefilter1.Name = "datefilter1";
             this.datefilter1.Size = new System.Drawing.Size(259, 26);
             this.datefilter1.TabIndex = 5;
@@ -214,45 +205,6 @@
             this.label3.Text = "Log Aktivitas";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 18F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(29, 380);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(231, 46);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Data Produk";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // dgproduk
-            // 
-            this.dgproduk.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgproduk.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgproduk.Location = new System.Drawing.Point(37, 447);
-            this.dgproduk.Name = "dgproduk";
-            this.dgproduk.RowHeadersWidth = 62;
-            this.dgproduk.RowTemplate.Height = 28;
-            this.dgproduk.Size = new System.Drawing.Size(795, 189);
-            this.dgproduk.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label6.Location = new System.Drawing.Point(567, 410);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 26);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Cari";
-            // 
-            // caritxt
-            // 
-            this.caritxt.Location = new System.Drawing.Point(625, 410);
-            this.caritxt.Name = "caritxt";
-            this.caritxt.Size = new System.Drawing.Size(207, 26);
-            this.caritxt.TabIndex = 13;
-            // 
             // LogAktivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -272,7 +224,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dglogakt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgproduk)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -293,9 +244,5 @@
         private System.Windows.Forms.DateTimePicker datefilter2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbrole;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView dgproduk;
-        private System.Windows.Forms.TextBox caritxt;
     }
 }
