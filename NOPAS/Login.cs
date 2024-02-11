@@ -20,6 +20,15 @@ namespace NOPAS
             try
             {
                 conn.Open();
+                // Mengecek apakah tombol Caps Lock aktif
+                bool isCapsLockActive = Control.IsKeyLocked(Keys.CapsLock);
+
+                // Jika Caps Lock aktif, berikan peringatan kepada pengguna
+                if (isCapsLockActive)
+                {
+                    MessageBox.Show("Caps Lock aktif. Harap perhatikan penggunaan huruf besar/kecil pada kata sandi.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 MySqlDataAdapter sda = new MySqlDataAdapter("SELECT * FROM users WHERE username='" + textBox1.Text + "' AND password='" + pw.Text + "'", conn);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);

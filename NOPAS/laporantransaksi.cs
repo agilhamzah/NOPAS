@@ -221,8 +221,8 @@ namespace NOPAS
                 doc.Open();
 
                 // Membuat table dengan jumlah kolom sesuai dengan jumlah kolom di dalam DataGridView
-                PdfPTable table = new PdfPTable(6);
-                string[] headers = { "ID", "Nama Produk", "Nomor Unik", "Nama Pelanggan", "Day", "Total" };
+                PdfPTable table = new PdfPTable(7);
+                string[] headers = { "ID", "Nama Produk", "Nomor Unik", "Nama Pelanggan", "Qty", "Day", "Total" };
                 foreach (string header in headers)
 
                     // Menambahkan header ke dalam table
@@ -242,13 +242,34 @@ namespace NOPAS
                 {
                         if (!row.IsNewRow)
                         {
-                            table.AddCell(row.Cells[0].Value?.ToString()); // ID
-                            table.AddCell(row.Cells[1].Value?.ToString()); // Nama Produk
-                            table.AddCell(row.Cells[6].Value?.ToString()); // Nomor Unik
-                            table.AddCell(row.Cells[3].Value?.ToString()); // Nama Pelanggan
-                            table.AddCell(row.Cells[5].Value?.ToString()); // Day
-                            table.AddCell(row.Cells[9].Value?.ToString()); // Total
-                        }
+                        PdfPCell cell1 = new PdfPCell(new Phrase(row.Cells[0].Value?.ToString()));
+                        cell1.HorizontalAlignment = Element.ALIGN_CENTER; 
+                        table.AddCell(cell1); // ID
+
+                        PdfPCell cell2 = new PdfPCell(new Phrase(row.Cells[1].Value?.ToString()));
+                        cell2.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell2); // Nama Produk
+
+                        PdfPCell cell3 = new PdfPCell(new Phrase(row.Cells[6].Value?.ToString()));
+                        cell3.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell3); // Nomor Unik
+
+                        PdfPCell cell4 = new PdfPCell(new Phrase(row.Cells[3].Value?.ToString()));
+                        cell4.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell4); // Nama Pelanggan
+
+                        PdfPCell cell5 = new PdfPCell(new Phrase(row.Cells[4].Value?.ToString()));
+                        cell5.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell5); // Qty
+
+                        PdfPCell cell6 = new PdfPCell(new Phrase(row.Cells[5].Value?.ToString()));
+                        cell6.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell6); // Day
+
+                        PdfPCell cell7 = new PdfPCell(new Phrase(row.Cells[9].Value?.ToString()));
+                        cell7.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell7); // Total
+                    }
                 }
 
                 // Mengatur garis di sekitar tabel
