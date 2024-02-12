@@ -55,50 +55,7 @@ namespace NOPAS
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            try
-            {
-                MySqlConnection conn = new MySqlConnection("datasource=127.0.0.1;port=3306;username=root;password=;database=nopas");
-                {
-                    conn.Open();
-                    using (DataTable dt = new DataTable("users"))
-                    {
-                        string roleFilter = "";  // Tambahkan variabel untuk menyimpan filter peran
-
-                        // Cek apakah ComboBox peran dipilih
-                        if (cbrole.SelectedIndex != -1)
-                        {
-                            roleFilter = "AND u.role = @selectedRole ";
-                        }
-
-                        using (MySqlCommand cmd = new MySqlCommand("SELECT l.id, l.id_user, u.nama, u.role, l.activity, l.created_at " +
-                                                                   "FROM log l " +
-                                                                   "JOIN users u ON l.id_user = u.id " +
-                                                                   "WHERE DATE(l.created_at) BETWEEN DATE(@fromdate) AND DATE(@todate) " +
-                                                                   roleFilter +  // Tambahkan filter peran ke dalam kueri
-                                                                   "ORDER BY l.created_at ASC", conn))
-                        {
-                            cmd.Parameters.AddWithValue("@fromdate", datefilter1.Value.ToString("yyyy-MM-dd"));
-                            cmd.Parameters.AddWithValue("@todate", datefilter2.Value.ToString("yyyy-MM-dd"));
-
-                            // Tambahkan parameter untuk ComboBox peran jika dipilih
-                            if (cbrole.SelectedIndex != -1)
-                            {
-                                cmd.Parameters.AddWithValue("@selectedRole", cbrole.SelectedItem.ToString());
-                            }
-
-                            using (MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd))
-                            {
-                                mySqlDataAdapter.Fill(dt);
-                                dglogakt.DataSource = dt;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

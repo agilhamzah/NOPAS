@@ -35,12 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbrole = new System.Windows.Forms.ComboBox();
-            this.datefilter2 = new System.Windows.Forms.DateTimePicker();
             this.dglogakt = new System.Windows.Forms.DataGridView();
-            this.filterlog = new System.Windows.Forms.Button();
-            this.datefilter1 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -107,12 +102,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.cbrole);
-            this.panel2.Controls.Add(this.datefilter2);
             this.panel2.Controls.Add(this.dglogakt);
-            this.panel2.Controls.Add(this.filterlog);
-            this.panel2.Controls.Add(this.datefilter1);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Location = new System.Drawing.Point(399, 33);
@@ -120,78 +110,28 @@
             this.panel2.Size = new System.Drawing.Size(875, 648);
             this.panel2.TabIndex = 5;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.Location = new System.Drawing.Point(696, 174);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 26);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Role";
-            // 
-            // cbrole
-            // 
-            this.cbrole.FormattingEnabled = true;
-            this.cbrole.Items.AddRange(new object[] {
-            "admin",
-            "kasir"});
-            this.cbrole.Location = new System.Drawing.Point(701, 206);
-            this.cbrole.Name = "cbrole";
-            this.cbrole.Size = new System.Drawing.Size(121, 28);
-            this.cbrole.TabIndex = 8;
-            // 
-            // datefilter2
-            // 
-            this.datefilter2.Location = new System.Drawing.Point(316, 139);
-            this.datefilter2.Name = "datefilter2";
-            this.datefilter2.Size = new System.Drawing.Size(259, 26);
-            this.datefilter2.TabIndex = 7;
-            this.datefilter2.Value = new System.DateTime(2024, 1, 14, 19, 54, 25, 0);
-            // 
             // dglogakt
             // 
             this.dglogakt.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dglogakt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dglogakt.Location = new System.Drawing.Point(37, 246);
+            this.dglogakt.Location = new System.Drawing.Point(37, 155);
             this.dglogakt.Name = "dglogakt";
             this.dglogakt.RowHeadersWidth = 62;
             this.dglogakt.RowTemplate.Height = 28;
-            this.dglogakt.Size = new System.Drawing.Size(795, 369);
+            this.dglogakt.Size = new System.Drawing.Size(795, 460);
             this.dglogakt.TabIndex = 6;
             this.dglogakt.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dglogakt.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // filterlog
-            // 
-            this.filterlog.BackColor = System.Drawing.Color.Maroon;
-            this.filterlog.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterlog.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.filterlog.Location = new System.Drawing.Point(37, 186);
-            this.filterlog.Name = "filterlog";
-            this.filterlog.Size = new System.Drawing.Size(116, 34);
-            this.filterlog.TabIndex = 3;
-            this.filterlog.Text = "Filter";
-            this.filterlog.UseVisualStyleBackColor = false;
-            this.filterlog.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // datefilter1
-            // 
-            this.datefilter1.Location = new System.Drawing.Point(37, 139);
-            this.datefilter1.Name = "datefilter1";
-            this.datefilter1.Size = new System.Drawing.Size(259, 26);
-            this.datefilter1.TabIndex = 5;
-            this.datefilter1.Value = new System.DateTime(2024, 1, 14, 19, 54, 25, 0);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label4.Location = new System.Drawing.Point(32, 94);
+            this.label4.Location = new System.Drawing.Point(32, 108);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 26);
+            this.label4.Size = new System.Drawing.Size(176, 26);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Pilih Tanggal";
+            this.label4.Text = "Data Log Activity";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
@@ -237,12 +177,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker datefilter1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dglogakt;
-        private System.Windows.Forms.Button filterlog;
-        private System.Windows.Forms.DateTimePicker datefilter2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbrole;
     }
 }
