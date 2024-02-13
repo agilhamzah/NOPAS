@@ -57,7 +57,7 @@ namespace NOPAS
         }
         public void ShowForm1AsDialog()
         {
-            historitransaksi form1 = new historitransaksi();
+            cetakulang form1 = new cetakulang();
             form1.ShowDialog();
         }
 

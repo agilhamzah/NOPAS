@@ -439,7 +439,7 @@ namespace NOPAS
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-            new historitransaksi().Show();
+            new cetakulang().Show();
         }
 
         private void uangbyr_TextChanged(object sender, EventArgs e)

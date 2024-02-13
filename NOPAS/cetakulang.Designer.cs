@@ -1,6 +1,6 @@
 ﻿namespace NOPAS
 {
-    partial class historitransaksi
+    partial class cetakulang
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(historitransaksi));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cetakulang));
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.lbnama = new System.Windows.Forms.Label();
@@ -154,9 +154,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 18F, System.Drawing.FontStyle.Bold);
             this.label3.Location = new System.Drawing.Point(19, 23);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(301, 46);
+            this.label3.Size = new System.Drawing.Size(231, 46);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Histori Transaksi";
+            this.label3.Text = "Cetak Struck";
             // 
             // dghistori
             // 

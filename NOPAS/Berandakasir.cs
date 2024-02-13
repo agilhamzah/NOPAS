@@ -47,7 +47,7 @@ namespace NOPAS
         private void label5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new historitransaksi().Show();
+            new cetakulang().Show();
         }
 
         private void Berandakasir_Load(object sender, EventArgs e)

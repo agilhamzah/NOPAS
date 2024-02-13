@@ -57,7 +57,7 @@ namespace NOPAS
                         else if (Data.role == "kasir")
                         {
                             this.Hide();
-                            new Berandakasir().Show();
+                            new Transaksi().Show();
                         }
                         else if (Data.role == "owner")
                         {

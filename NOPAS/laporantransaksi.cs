@@ -221,8 +221,8 @@ namespace NOPAS
                 doc.Open();
 
                 // Membuat table dengan jumlah kolom sesuai dengan jumlah kolom di dalam DataGridView
-                PdfPTable table = new PdfPTable(7);
-                string[] headers = { "ID", "Nama Produk", "Nomor Unik", "Nama Pelanggan", "Qty", "Day", "Total" };
+                PdfPTable table = new PdfPTable(8);
+                string[] headers = { "ID", "Nama Produk", "Nomor Unik", "Nama Pelanggan", "Qty", "Day", "Total", "Tanggal" };
                 foreach (string header in headers)
 
                     // Menambahkan header ke dalam table
@@ -269,6 +269,10 @@ namespace NOPAS
                         PdfPCell cell7 = new PdfPCell(new Phrase(row.Cells[9].Value?.ToString()));
                         cell7.HorizontalAlignment = Element.ALIGN_CENTER;
                         table.AddCell(cell7); // Total
+
+                        PdfPCell cell8 = new PdfPCell(new Phrase(row.Cells[10].Value?.ToString()));
+                        cell7.HorizontalAlignment = Element.ALIGN_CENTER;
+                        table.AddCell(cell8); // tanggal
                     }
                 }
 
@@ -285,7 +289,6 @@ namespace NOPAS
                 doc.Add(table);
 
                 // Menambahkan kalimat ke dokumen
-                doc.Add(p);
 
                 // Menutup dokumen dan writer
                 doc.Close();
@@ -293,12 +296,29 @@ namespace NOPAS
 
                 // Membuka file PDF setelah disimpan
                 Process.Start(saveFileDialog1.FileName);
+
+                LoadAllData();
                 
             }
         }
         private bool filterTanggalDipilih()
         {
             return tglawal.Value.Date != DateTime.Today || tglakhir.Value.Date != DateTime.Today;
+        }
+        private void LoadAllData()
+        {
+            try
+            {
+                // Anda bisa memuat data dari sumber data aslinya, dalam kasus ini menggunakan method showData
+                l.showData("SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
+                      "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
+                      "FROM transactions t " +
+                      "JOIN products p ON t.id_produk = p.id", dataGridTransaksi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void tgl1_ValueChanged(object sender, EventArgs e)
@@ -315,13 +335,7 @@ namespace NOPAS
 
         private void reset_Click(object sender, EventArgs e)
         {
-            string query = "SELECT t.id, p.nama_produk, p.harga_produk, t.nama_pelanggan, t.qty, t.days, t.nomor_unik, " +
-                          "t.uang_bayar, t.uang_kembali, t.total_harga, t.created_at " +
-                          "FROM transactions t " +
-                          "JOIN products p ON t.id_produk = p.id " +
-                          "ORDER BY t.created_at ASC";
-
-            l.showData(query, dataGridTransaksi);
+           
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

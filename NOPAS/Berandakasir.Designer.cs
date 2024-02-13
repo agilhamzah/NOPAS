@@ -170,11 +170,11 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Bahnschrift Condensed", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(144, 11);
+            this.label5.Location = new System.Drawing.Point(129, 11);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(180, 106);
+            this.label5.Size = new System.Drawing.Size(221, 106);
             this.label5.TabIndex = 3;
-            this.label5.Text = "HISTORI \r\nTRANSAKSI";
+            this.label5.Text = "CETAK ULANG \r\nSTRUCK";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 

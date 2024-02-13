@@ -15,13 +15,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace NOPAS
 {
-    public partial class historitransaksi : Form
+    public partial class cetakulang : Form
     {
         
 
         MySqlConnection conn = new MySqlConnection("datasource=127.0.0.1;port=3306;username=root;password=;database=nopas");
         Data h = new Data();
-        public historitransaksi()
+        public cetakulang()
         {
             InitializeComponent();
         }

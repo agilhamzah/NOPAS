@@ -139,11 +139,11 @@
     <Compile Include="laporan.Designer.cs">
       <DependentUpon>laporan.cs</DependentUpon>
     </Compile>
-    <Compile Include="historitransaksi.cs">
+    <Compile Include="cetakulang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="historitransaksi.Designer.cs">
-      <DependentUpon>historitransaksi.cs</DependentUpon>
+    <Compile Include="cetakulang.Designer.cs">
+      <DependentUpon>cetakulang.cs</DependentUpon>
     </Compile>
     <Compile Include="laporantransaksi.cs">
       <SubType>Form</SubType>
@@ -202,8 +202,8 @@
     <EmbeddedResource Include="laporan.resx">
       <DependentUpon>laporan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="historitransaksi.resx">
-      <DependentUpon>historitransaksi.cs</DependentUpon>
+    <EmbeddedResource Include="cetakulang.resx">
+      <DependentUpon>cetakulang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="laporantransaksi.resx">
       <DependentUpon>laporantransaksi.cs</DependentUpon>

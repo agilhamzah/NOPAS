@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace NOPAS
@@ -156,6 +160,90 @@ namespace NOPAS
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Membuat instance dari class Document iTextSharp
+            Document doc = new Document(PageSize.A4.Rotate(), 10f, 10f, 10f, 0f);
+
+            iTextSharp.text.Font fontTitle = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 16, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Font font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12);
+
+
+            // Membuat objek paragraph dengan judul
+            Paragraph title = new Paragraph("Laporan Produk", fontTitle);
+            title.Alignment = Element.ALIGN_CENTER; // Mengatur perataan teks
+            title.SpacingAfter = 40;
+            title.SpacingBefore = 40;
+
+            // Membuat objek Paragraph untuk menampung kalimat di bagian bawah tabel
+
+
+
+            // Menentukan lokasi penyimpanan file PDF
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "PDF (.pdf)|.pdf";
+            saveFileDialog1.FileName = "Data Produk.pdf";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Membuka file PDF
+                PdfWriter.GetInstance(doc, new FileStream(saveFileDialog1.FileName, FileMode.Create));
+
+                // Membuka dokumen
+                doc.Open();
+
+                // Membuat table dengan jumlah kolom sesuai dengan jumlah kolom di dalam DataGridView
+                PdfPTable table = new PdfPTable(dataGridView1.Columns.Count);
+
+                // Menambahkan header ke dalam table
+                for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                {
+                    PdfPCell cell = new PdfPCell(new Phrase(dataGridView1.Columns[i].HeaderText));
+                    cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
+                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    cell.Padding = 5;
+                    cell.BorderWidth = 1;
+                    table.AddCell(cell);
+                }
+
+                // Menambahkan data dari DataGridView ke dalam table
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                    {
+                        if (dataGridView1[j, i].Value != null)
+                        {
+                            PdfPCell cell = new PdfPCell(new Phrase(dataGridView1[j, i].Value.ToString()));
+                            cell.Padding = 5;
+                            cell.BorderWidth = 1;
+                            table.AddCell(cell);
+                        }
+                    }
+                }
+
+                // Mengatur garis di sekitar tabel
+                table.DefaultCell.BorderWidth = 0;
+                table.DefaultCell.BorderColor = new iTextSharp.text.BaseColor(200, 200, 200);
+                table.DefaultCell.Padding = 7;
+                table.WidthPercentage = 100;
+
+                // Menambahkan paragraph ke dokumen
+                doc.Add(title);
+
+                // Menambahkan table ke dalam dokumen
+                doc.Add(table);
+
+                // Menambahkan kalimat ke dokumen
+
+                // Menutup dokumen dan writer
+                doc.Close();
+                MessageBox.Show("Data berhasil di-print ke dalam file PDF.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Membuka file PDF setelah disimpan
+                Process.Start(saveFileDialog1.FileName);
+            }
         }
     }
 }

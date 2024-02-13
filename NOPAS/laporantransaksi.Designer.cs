@@ -35,7 +35,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.reset = new System.Windows.Forms.Button();
             this.tglakhir = new System.Windows.Forms.DateTimePicker();
             this.tglawal = new System.Windows.Forms.DateTimePicker();
             this.cetak = new System.Windows.Forms.Button();
@@ -110,7 +109,6 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.reset);
             this.panel2.Controls.Add(this.tglakhir);
             this.panel2.Controls.Add(this.tglawal);
             this.panel2.Controls.Add(this.cetak);
@@ -125,19 +123,6 @@
             this.panel2.Size = new System.Drawing.Size(875, 648);
             this.panel2.TabIndex = 6;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // reset
-            // 
-            this.reset.BackColor = System.Drawing.Color.Maroon;
-            this.reset.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reset.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.reset.Location = new System.Drawing.Point(307, 202);
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(79, 40);
-            this.reset.TabIndex = 13;
-            this.reset.Text = "Reset";
-            this.reset.UseVisualStyleBackColor = false;
-            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // tglakhir
             // 
@@ -176,9 +161,9 @@
             this.label2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(566, 157);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 27);
+            this.label2.Size = new System.Drawing.Size(46, 27);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Nama LKBB";
+            this.label2.Text = "Cari";
             // 
             // cari
             // 
@@ -273,6 +258,5 @@
         private System.Windows.Forms.Button cetak;
         private System.Windows.Forms.DateTimePicker tglakhir;
         private System.Windows.Forms.DateTimePicker tglawal;
-        private System.Windows.Forms.Button reset;
     }
 }
